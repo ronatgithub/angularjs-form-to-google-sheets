@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="myApp">
   <head>
-    <title>AngularJS Form</title>
+    <title>Contact Form - Availability Check</title>
     <script type="text/javascript" src="http://code.angularjs.org/1.2.25/angular.min.js"></script>
     <script type="text/javascript" src="js/modules/promise-tracker.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script src="js/datepicker/js/angular-datepicker.js"></script>
+    <link rel="stylesheet" href="js/datepicker/css/angular-datepicker.css" type="text/css" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
   </head>
   <body class="container">
-  
-  <h2>AngularJs form</h2>
+    <div class="col-md-6 col-md-offset-3">
 
-  <p>This is an AngularJs based form. It uses a controller to handle form validation and submission.</p>
-  <p>Find a step by step tutorial on this form at <a href="https://www.lullabot.com/blog/article/processing-forms-angularjs">the Lullabot Blog</a>.</p>
-  <a href="https://github.com/juampy72/angularjs_form"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+    <h2>Availability Check</h2>
 
-  <div data-ng-controller="help">
-    <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
-    <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
-    <form name="helpForm" novalidate role="form">
-      <div class="form-group">
-        <label for="name">Your Name </label>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
-        <input type="text" name="name" data-ng-model="name" class="form-control" required />
-      </div>
+    <p>Please complete the form below. </br> </p>
 
-      <div class="form-group">
-        <label for="email">Your E-mail address</label>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
-        <input type="email" name="email" data-ng-model="email" class="form-control" required />  
-      </div>
+    <div data-ng-controller="help">
+      <div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+      <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+      <form name="helpForm" novalidate role="form">
+        <div class="form-group">
+          <label for="in">Check In </label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.in.$error.required">Required!</span>
+          <datepicker date-format="dd-MMMM-yyyy">
+            <input type="text" name="in" data-ng-model="in" class="form-control" required />
+          </datepicker>
+        </div>
 
-      <div class="form-group">
-        <label for="subjectList">What is the nature of your request?</label>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
-        <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control" required>
-          <option value=""></option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="out">Check Out </label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.out.$error.required">Required!</span>
+          <datepicker date-format="dd-MMMM-yyyy">
+            <input type="text" name="out" data-ng-model="out" class="form-control" required />
+          </datepicker>
+        </div>
 
-      <div class="form-group">
-        <label for="url">URL of Relevant Page</label>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.$error.url">Invalid URL format!</span>
-        <input type="url" name="url" data-ng-model="url" class="form-control" />
-      </div>
+        <div class="form-group">
+          <label for="pax">How many Guest</label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.pax.$error.required">Required!</span>
+          <input type="number" name="pax" data-ng-model="pax" class="form-control" required />
+        </div>
 
-      <div class="form-group">
-        <label for="comments">Description</label>
-        <span class="label label-danger" data-ng-show="submitted && helpForm.comments.$error.required">Required!</span>
-        <textarea name="comments" data-ng-model="comments" class="form-control" required></textarea>
-      </div>
+        <div class="form-group">
+          <label for="name">Your Name </label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
+          <input type="text" name="name" data-ng-model="name" class="form-control" required />
+        </div>
 
-      <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
-    </form>
-  </div>
+        <div class="form-group">
+          <label for="email">Your E-mail address</label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
+          <input type="email" name="email" data-ng-model="email" class="form-control" required />  
+        </div>
 
+        <div class="form-group">
+          <label for="subjectList">View and select any additional services or extras you might want, leave empty if you are ok with just the room.</label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
+          <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control">
+            <option value=""></option>
+          </select>
+        </div>
+
+        <div ng-show="subjectList=='special'" class="form-group">
+          <label for="comments">What are your requirements? You can write us a short message here.</label>
+          <span class="label label-danger" data-ng-show="submitted && helpForm.comments.$error.required">Required!</span>
+          <textarea name="comments" data-ng-model="comments" class="form-control"></textarea>
+        </div>
+
+        <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+
+    </div>
   </body>
 </html>
