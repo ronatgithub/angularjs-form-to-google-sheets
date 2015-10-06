@@ -10,3 +10,4 @@ There is a step by step tutorial on this form at [the Lullabot Blog](https://www
 
 Simply clone this repository on a directory accessible from your local web server.
 Then, open index.html from a web browser.
+# angularjs_form_hotel_availability_check
