@@ -45,6 +45,7 @@ angular.module('myApp', ['ajoslin.promise-tracker','720kb.datepicker'])
       // Default values for the request.
       var formData = {
           'timestamp' : displayTime(),
+          'owner' : window.location.host,
           'name' : $scope.name,
           'email' : $scope.email,
           'subjectList' : $scope.subjectList,
